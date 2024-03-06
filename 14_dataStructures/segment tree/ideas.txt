@@ -1,0 +1,6 @@
+update      query
+node	    subtree   >> tree flatten begin only.
+subtree     subtree   >> tree flatten begin only with lazy.
+cpy sfted   arr val   >> (lazy with virtual segTree).  
+treePath   treeNode   >> tree flatten begin and end with (lazy with virtual segTree)
+  

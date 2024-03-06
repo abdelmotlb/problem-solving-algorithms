@@ -1,0 +1,65 @@
+// seg tree starts with node = 1 with all range from l = 0 to r = n - 1;
+// size of seg tree is 4 * N where as N = max value.
+
+// to make seg tree works: build it and give it the size of array.
+
+const int N = 2e5 + 1;
+vector<ll> segTree(N * 4, 0);
+
+// update n.
+int szArr;
+void buildSeg(vector<ll> &arr, int node = 1, int l = 0, int r = szArr-1){
+
+    // leaves
+    if(l == r){
+        segTree[node] = arr[l];
+        return;
+    }
+
+    // update children then their parents
+    int mid = (l + r) >> 1;
+    buildSeg(arr, node << 1, l, mid),
+    buildSeg(arr, node << 1 | 1, mid+1, r);
+
+    segTree[node] = segTree[node << 1] + segTree[node << 1 | 1];
+}
+
+void update(int index, int value, int node = 1, int l = 0, int r = szArr - 1){
+
+    // range doesn't have index.
+    if( r < index || index < l ){
+        return;
+    }
+
+    // the index at which add (value).
+    if(l == r){
+        segTree[node] = value;
+        return;
+    }
+
+    // update children then their parents
+    int mid = (l + r) >> 1;
+    update(index, value, node << 1, l, mid),
+    update(index, value, node << 1 | 1, mid+1, r);
+
+    segTree[node] = segTree[node << 1] + segTree[node << 1 | 1];
+}
+
+
+ll query(int goalStart, int goalEnd, int node = 1, int l = 0, int r = szArr - 1){
+
+    // out of goal range.
+    if( goalEnd < l || r < goalStart )
+        return 0;
+
+    // completely in goal range.
+    if( goalStart <= l && r <= goalEnd )
+        return segTree[node];
+
+    // intersection between segment of goal and current segment.
+    int mid = (l + r) >> 1;
+
+    // got by going deep in its children.
+    return query(goalStart, goalEnd, node << 1, l, mid)
+         + query( goalStart, goalEnd, node << 1 | 1, mid+1, r);
+}

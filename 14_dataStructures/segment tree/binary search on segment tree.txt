@@ -1,0 +1,10 @@
+https://cses.fi/problemset/task/1749
+ll query(ll val, int node = 1, int l = 0, int r = szArr - 1){
+    if(seg[node] < val) return -1;
+    if(l == r) return l;
+
+    int mid = (l + r) >> 1;
+    ll a = query(val, node << 1, l, mid);
+    if(a == -1) return query(val - seg[node * 2], node << 1 | 1, mid + 1, r);
+    else return a;
+}

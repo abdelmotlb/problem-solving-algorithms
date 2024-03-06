@@ -1,0 +1,106 @@
+// seg tree starts with node = 1 with all range from l = 0 to r = n - 1;
+// size of seg tree is 4 * N where as N = max value.
+
+// to make seg tree works: build it and give it the size of array.
+
+const int N = 2e5 + 1;
+vector<ll> seg(N * 4, 0);
+vector<ll> lazy(N * 4, 0);
+
+ll merge(ll a, ll b){
+    ll c = min(a, b);
+    return c;
+}
+
+// update n.
+int szArr;
+void buildSeg(vector<ll> &arr, int node = 1, int l = 0, int r = szArr-1){
+
+    // leaves
+    if(l == r){
+        seg[node] = arr[l];
+        // lazy start.
+        return;
+    }
+
+    // update children then their parents
+    int mid = (l + r) >> 1;
+    buildSeg(arr, node << 1, l, mid),
+    buildSeg(arr, node << 1 | 1, mid+1, r);
+    seg[node] = merge(seg[node << 1], seg[node << 1 | 1]);
+}
+// may be more than one lazy value propagated in some node.
+void prop(int node, int l, int r){
+    if(!lazy[node])return;	
+
+    // left.
+    seg[node] += lazy[node];
+    //  * (r - l + 1)
+
+    // down
+    if(l != r){
+	// can be propagated.
+        lazy[node*2] += lazy[node];
+        lazy[node*2+1] += lazy[node];
+    }
+
+    // in.
+    lazy[node] = 0;
+}
+
+void updateRange(int gs, int ge, int value, int node = 1, int l = 0, int r = szArr - 1){
+    prop(node, l, r);
+    if(ge < l || r < gs){
+        return;
+    }
+    if(gs <= l && r <= ge){
+        lazy[node] = value,
+        prop(node, l, r);
+        return;
+    }
+    int mid = (l + r)/2;
+    updateRange(gs, ge, value, node*2, l, mid);
+    updateRange(gs, ge, value, node*2+1, mid+1, r);
+    seg[node] = merge(seg[node*2], seg[node*2+1]);
+}
+void updateVal(int index, int value, int node = 1, int l = 0, int r = szArr - 1){
+    prop(node, l, r);
+
+    // range doesn't have index.
+    if( r < index || index < l ){
+        return;
+    }
+
+    // the index at which add (value).
+    if(l == r){
+        seg[node] = value;
+        return;
+    }
+
+    // update children then their parents
+    int mid = (l + r) >> 1;
+    updateVal(index, value, node << 1, l, mid),
+    updateVal(index, value, node << 1 | 1, mid+1, r);
+    seg[node] = merge(seg[node*2], seg[node*2+1]);
+}
+
+
+ll query(int goalStart, int goalEnd, int node = 1, int l = 0, int r = szArr - 1){
+    prop(node, l, r);
+
+    // out of goal range.
+    if( goalEnd < l || r < goalStart )
+        return INT_MAX;
+
+    // completely in goal range.
+    if( goalStart <= l && r <= goalEnd )
+        return seg[node];
+
+
+    // intersection between segment of goal and current segment.
+    int mid = (l + r) >> 1;
+    // got by going deep in its children.
+    ll a = query(goalStart, goalEnd, node << 1, l, mid);
+    ll b = query( goalStart, goalEnd, node << 1 | 1, mid+1, r);
+    return merge(a, b);
+}

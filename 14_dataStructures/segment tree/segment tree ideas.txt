@@ -1,0 +1,2 @@
+[1] segment tree on frequency such as problem: ai < aj < ak.
+[2] creating a sequence or behaviour by merging: max sum on segment, switch seg on(4, 7) with get max non-decreasing seq.
