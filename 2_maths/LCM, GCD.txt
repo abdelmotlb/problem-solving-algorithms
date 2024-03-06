@@ -1,0 +1,9 @@
+ll LCM(ll a, ll b){
+	return b/GCD(a, b)*a;
+}
+
+// a = b*q + r
+ll GCD(ll a, ll b){
+	if(b == 0) return a;
+	return GCD(b, a%b);
+}

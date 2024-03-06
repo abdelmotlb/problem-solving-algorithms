@@ -1,0 +1,13 @@
+const ll N = 1e5 + 10;
+bool primeArr[N];
+void isPrime(int Max){
+    Fill(primeArr, true);
+    primeArr[0] = primeArr[1] = false;
+    for(int i = 2; i*i <= Max; i++){
+        if( !primeArr[i] )
+            continue;
+        for (int j = i*i; j <= Max; j += i) {
+            primeArr[j] = false;
+        }
+    }
+}

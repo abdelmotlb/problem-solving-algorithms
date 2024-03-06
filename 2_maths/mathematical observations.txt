@@ -1,0 +1,6 @@
+[1] number has odd number of divisors >> it is a power of 2.
+[2] divisors of a number(x) got by mirror around sqrt(x)
+[3] gcd of (x, x+1) is 1.
+[4] square root is increasing function so use binary search.
+[5] totient & number of divisors & sum of divisors & sum of div^2...
+[6] phi(phi(n)) <= n/2 which can evaluated in log(n) for p(p(p(...p(n).

@@ -1,0 +1,4 @@
+phi(n) >> number of integer i >> [1, n] that gcd(i, n) == 1.
+phi(p^k) >> p^k - p^(k-1).
+phi(ab) >> phi(a).phi(b) [if gcd(a, b) = 1]
+phi(p1^k1 * p2^k2 * p3^k3) >> n.(1 - 1/p1).(1 - 1/p2)...

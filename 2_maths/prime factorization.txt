@@ -1,0 +1,10 @@
+void factors(ll n, map<ll, ll> &mp){
+    ll m = n;
+    for(ll i = 2 ; i * i <= m && n-1 ; i++){
+        while(n%i == 0){
+            mp[i]++;
+            n /= i;
+        }
+    }
+    if(n > 1)mp[n]++;
+}

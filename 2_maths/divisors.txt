@@ -1,0 +1,10 @@
+
+void divisors(int n, vector<int> &divisors){
+    for(int i = 1; i*i <= n;i++){
+        if( n % i );
+        else if( i*i == n )divisors.push_back(i);
+        else
+            divisors.push_back(i),
+            divisors.push_back(n/i);
+    }
+}

@@ -1,0 +1,4 @@
+[1] Nln(N) >> get the multipliers of each number.
+[2] Nsqrt(N) >> get the divisors for each number.
+
+learning >> https://codeforces.com/contest/414/problem/B.

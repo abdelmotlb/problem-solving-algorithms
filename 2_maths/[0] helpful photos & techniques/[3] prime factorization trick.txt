@@ -1,0 +1,2 @@
+>> the prime factorization of any number from 1 to 1e9 will be represented as product of 30 numbers(2 ^ 30) as max.
+	>> so you can get it and apply whatever operations you want(sort, sum, ....).
