@@ -1,0 +1,4 @@
+in problem of partition number 5 = 1+2+2 and so on.
+	if you watch the ans for values 5, 4, 3,.. >> you observe that it need dp as 5 values can extracted from 4... >> decided to save state for the num.
+	you observe that there are a repeations in sequences >> 1+2+2 >> 2+1+2 >> decided to get the answer values sorted from 1....n so need to save a state for last taken value.
+	we note the transition optimization dp(i, taken) = sum(dp, dp..) >> dp(..) + dp(..). that comes from (state independence(less understand)) (collect some states to be got by one state instead.)

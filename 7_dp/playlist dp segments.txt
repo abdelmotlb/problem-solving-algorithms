@@ -1,0 +1,8 @@
+lec 1:           1D dp
+lec 9:           2D dp (dp on grids)
+lec 14:         dp on subsequences
+lec 25:         dp on strings
+lec 36:         dp on stocks
+lec 41:         LIS pattern
+lec 48:         partition dp
+lec 55:         dp on rectangles

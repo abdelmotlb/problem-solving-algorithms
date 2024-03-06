@@ -1,0 +1,20 @@
+// N * W <= 1e7
+
+ll rec(vector<ll> &wght, vector<ll> &gain,
+ vector<vector<ll>> &dp, int ind, ll remwght) {
+    // base case.
+    if(ind == -1)
+        return 0;
+
+    // dp check.
+    if(dp[ind][remwght] != -1) return dp[ind][remwght];
+
+    // transitions.
+        // non pick
+        ll reta = rec(wght, gain, dp, ind-1, remwght);
+        // pick
+        ll retb = 0;
+        if(wght[ind] <= remwght) 
+           retb = gain[ind] + rec(wght, gain, dp, ind-1, remwght - wght[ind]);
+    return dp[ind][remwght] = max(reta, retb);
+}
