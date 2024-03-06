@@ -1,0 +1,58 @@
+
+//////////// for small numbers /////////////////////////
+
+ll GCD(ll a, ll b){
+    if(b == 0) return a;
+    return GCD(b, a%b);
+}
+
+ll nCr(ll n, ll r){
+    ll num = 1, denum = 1;
+    For(i,1,r+1){
+        num *= (n - (i-1));
+        denum *= (i);
+        ll gcd = GCD(denum, num);
+        if( gcd != 1 ){
+            num /= gcd;
+            denum /= gcd;
+        }
+    }
+    return num / denum;
+}
+
+
+///////////// for large numbers /////////////////////////
+
+const ll MOD = 1e9+7, N = 2e5 + 10;
+int fact[N], inv[N];
+
+ll add(ll a, ll b) {
+    return ((a % MOD + b % MOD) + MOD) % MOD;
+}
+ 
+ll multi(ll a, ll b) {
+    return ((a % MOD * b % MOD) + MOD) % MOD;
+}
+ 
+ll fastpow(ll a, ll b) {
+    if (b == 0)return ll(1);
+    ll temp = fastpow(a, b / 2);
+    ll total = multi(temp, temp);
+    if (b % 2 == 1) {
+        total = multi(total, a);
+    }
+    return total;
+}
+ 
+int nCr( ll n , ll r)
+{
+    return multi(fact[n],multi(inv[n-r],inv[r]));
+}
+ 
+void createFact() {
+    fact[0] = inv[0] = 1;
+    for (int i = 1; i < N; i++) {
+        fact[i] = multi(i, fact[i - 1]);
+        inv[i] = fastpow(fact[i], MOD - 2);
+    }
+}
