@@ -1,0 +1,47 @@
+const int NOfLog = 2e5;
+int myLog[NOfLog];
+void nearestLog(){
+    // get floor.
+    myLog[1] = 0;
+    for (int i = 2; i < NOfLog; ++i) {
+        myLog[i] = myLog[i/2] + 1;
+    }
+}
+
+const int LOG = 25, N = 2e5;
+int sparse[N][LOG];
+void sparseBuild(vector<int> &arr, int n){
+    // base case.
+    for (int i = 0; i < n; ++i) {
+        sparse[i][0] = arr[i];
+    }
+    // dp.
+    for (int i = 1; i <= myLog[n]; ++i) {
+        for (int pivot = 0; pivot + ((1 << i) - 1) < n; ++pivot) {
+            sparse[pivot][i] = min(sparse[pivot][i-1], sparse[pivot + (1 << (i-1))][i-1]);
+        }
+    }
+}
+
+int queryLog(int l, int r, int n){
+    int ans = INT_MAX;
+    int len = r - l + 1;
+    int pivot = l;
+    for (int i = 0; i <= myLog[n]; ++i) {
+        if((1 << i) & len){
+            ans = min(ans, sparse[pivot][i]);
+            pivot += (1 << i);
+        }
+    }
+    return ans;
+}
+// for operations has overlapping property
+// min, max, GCD,....
+// means GCD(range of 16 and range of 16) some values repeated.
+int queryOne(int l, int r){
+    int len = r - l + 1;
+    int flog = myLog[len];
+    int ans = sparse[l][flog];
+    ans = min(ans, sparse[r - ((1 << flog) - 1)][flog]);
+    return ans;
+}
