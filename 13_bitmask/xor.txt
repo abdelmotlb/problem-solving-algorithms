@@ -1,0 +1,4 @@
+[1] apply xor in a single bit of a number with 0 >> no change.
+    apply xor in a single bit of a number with 1 >> toggle.
+[2] in a single bit >> odd number of ones appling xor >> res >> 1.
+    in a single bit >> even number of ones appling xor >> res >> 0.

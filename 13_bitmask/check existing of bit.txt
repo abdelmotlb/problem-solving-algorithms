@@ -1,0 +1,4 @@
+int countBits = 0;
+for(int msk = 0; msk < 30; ++msk) {
+	if(val & (1 << msk))countBits++;
+} 
