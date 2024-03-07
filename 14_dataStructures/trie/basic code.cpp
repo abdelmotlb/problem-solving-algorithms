@@ -1,3 +1,4 @@
+
 struct Node {
     private:
         // indicates if a string ends with this character
@@ -20,17 +21,17 @@ struct Node {
             return links[ch - 'a'];
         }
 
-        void addEnd() {
-            words++;
-        }
-
         int getEnds() {
             return words;
         }
 
-        bool getPrefixes() {
+        int getPrefixes() {
             return prefixes;
         }
+
+    void addEnd() {
+        words++;
+    }
 
         void removeEnd() {
             words--;
@@ -60,9 +61,10 @@ class Trie {
 
         void insert(string word) {
             Node *node = root;
-            for (int i = 0; i < word.size(); node = node -> getSuccessor(word[i]), i++) {
-                if (node -> isSuccessorExists(word[i])) continue;
-                node -> createSuccessor(word[i], new Node());
+            for (int i = 0; i < word.size(); i++) {
+                if (!node -> isSuccessorExists(word[i])) node -> createSuccessor(word[i], new Node());
+                node = node -> getSuccessor(word[i]);
+                node -> addPrefix();
             }
             node -> addEnd();
         }
@@ -85,8 +87,8 @@ class Trie {
         }
 
 
-        int countWordsStartingWith(string & word) {
-            Node * node = root;
+        int countWordsStartingWith(string &word) {
+            Node *node = root;
             for (int i = 0; i < word.length(); i++) {
                 if (node -> isSuccessorExists(word[i])) node = node -> getSuccessor(word[i]);
                 else return 0;
@@ -95,7 +97,7 @@ class Trie {
         }
 
         // assumes that you'll never erase non-existing words
-        void erase(string & word) {
+        void erase(string &word) {
             Node * node = root;
             for (int i = 0; i < word.length(); i++) {
                 node = node -> getSuccessor(word[i]);
