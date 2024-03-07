@@ -29,9 +29,9 @@ struct Node {
             return prefixes;
         }
 
-    void addEnd() {
-        words++;
-    }
+        void addEnd() {
+            words++;
+        }
 
         void removeEnd() {
             words--;
