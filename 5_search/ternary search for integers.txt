@@ -1,0 +1,12 @@
+   // for global max. 
+   problem disscussed: https://leetcode.com/problems/sum-of-mutated-array-closest-to-target/solutions/1253854/c-binary-search-peak-finding-o-nlogk-o-nlogn-logk-logn-prefix-sum/
+   int ternary(int n, MountainArray &mountainArr) {
+        int lo = -1, hi = n;
+        while (hi - lo > 1){
+            int mid = (hi + lo) >> 1;
+            if (f(mid, mountainArr) > f(mid + 1, mountainArr)) 
+                hi = mid;
+            else 
+                lo = mid; 
+        }return lo + 1;
+    }

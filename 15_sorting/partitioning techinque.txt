@@ -1,0 +1,1 @@
+each value know its position in the array.

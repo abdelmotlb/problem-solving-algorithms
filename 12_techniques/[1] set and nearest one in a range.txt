@@ -1,0 +1,14 @@
+const int N = 3e5 + 1;
+vector<int> ans(N, 0);
+set<int> st;
+void fun(int l, int r, int x) {
+    int nxt = l;
+    while(true) {
+        auto ind = st.lower_bound(nxt);
+        if(ind == st.end() || *ind > r)return;
+        nxt = *ind + 1;
+        if(*ind == x)continue;
+        ans[*ind] = x;
+        st.erase(ind); // if no need for it after now.
+    }
+}

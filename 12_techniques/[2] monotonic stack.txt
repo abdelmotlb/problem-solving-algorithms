@@ -1,0 +1,18 @@
+ monotonic(vector<int> &a, int n) {  
+    int a[n], mxl[n], mxr[n], mnl[n], mnr[n];
+    stack<int> s1, s2, s3, s4;
+    for(int i = 0; i < n; i++) {
+        while(!s1.empty() && a[s1.top()] < a[i]) s1.pop();
+        while(!s2.empty() && a[s2.top()] > a[i]) s2.pop();
+        while(!s3.empty() && a[s3.top()] < a[n - 1 - i]) s3.pop();
+        while(!s4.empty() && a[s4.top()] > a[n - 1 - i]) s4.pop();
+        mxl[i] = s1.empty() ? n : s1.top();
+        mnl[i] = s2.empty() ? n : s2.top();
+        mxr[n - 1 - i] = s3.empty() ? n : s3.top();
+        mnr[n - 1 - i] = s4.empty() ? n : s4.top();
+        s1.push(i);
+        s2.push(i);
+        s3.push(n - 1 - i);
+        s4.push(n - 1 - i);
+    }
+ }

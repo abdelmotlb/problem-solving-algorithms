@@ -1,0 +1,23 @@
+const int N = 1e5;
+vector<bool> visited(N, false);
+vector<int> graph[N];
+vector<int> level(N, 0);
+void bfs(int startNode) {
+    queue<int> q;
+
+    visited[startNode] = true;
+    level[startNode] = 1;
+    q.push(startNode);
+
+    while(!q.empty()) {
+        int parent = q.front();
+        q.pop();
+        for (auto child:graph[parent]) {
+            if (!visited[child]){
+                level[child] = level[parent] + 1;
+                visited[child] = true;
+                q.push(child);
+            }
+        }
+    }
+}

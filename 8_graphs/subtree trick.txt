@@ -1,0 +1,17 @@
+vector<int> tin(N), tout(N);
+vector<vector<int>> data_lvls;
+vector<vector<int>> begTimes;
+int timer = 1;
+void bydpth(vector<int> &data_to_be_stored, int node){
+    // visit
+    tin[node] = timer++;
+    begTimes[depth[node]].push_back(tin[node]);
+
+
+    // dfs
+    for(auto x: adj[node]){
+        bydpth(data_to_be_stored, x);
+    }
+
+    tout[node] = timer++;
+}

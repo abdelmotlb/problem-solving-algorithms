@@ -1,0 +1,15 @@
+// all combinations of array with states update Min, Max, sum.
+
+int powerSet(int index, int Max, int Min, ll sum){
+    // base case.
+    if(index == n){
+        if( Max == INT_MIN && Min == INT_MAX )return 0;
+        if( Max == Min )return 0;
+        if( l <= sum && sum <= r && Max - Min >= d )return 1;
+        return 0;
+    }
+
+    // recursion.
+    return powerSet(index+1, max(Max, arr[index]), min(Min, arr[index]), sum + arr[index])
+         + powerSet(index+1, Max, Min, sum);
+}

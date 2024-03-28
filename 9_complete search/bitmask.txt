@@ -1,0 +1,21 @@
+int powerSet(){
+
+    int ans = 0;
+    for (int mask = 0; mask < (1 << n); ++mask) {
+
+        // case.
+        int Max = INT_MIN, Min = INT_MAX, sum = 0;
+        for (int bit = 0; bit < n; ++bit) {
+            if( (mask >> bit) & 1 ){
+                Max = max(Max, arr[bit]);
+                Min = min(Min, arr[bit]);
+                sum += arr[bit];
+            }
+        }
+
+        // validation.
+        if( l <= sum && sum <= r && Max - Min >= d )ans++;
+    }
+    return ans ;
+
+}

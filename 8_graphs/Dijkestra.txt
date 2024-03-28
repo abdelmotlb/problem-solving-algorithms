@@ -1,0 +1,33 @@
+const ll INF = 1e18;
+const int N = 2e5;
+vector<pair<ll, int>> adj[N];
+void dijkstra(int s, int n , vector<int> & p , vector<ll> & d ) {
+    d.assign(n+1, INF);
+    p.assign(n+1, -1);
+
+    d[s] = 0;
+    using pii = pair<ll, int>;
+    priority_queue<pii, vector<pii>, greater<pii>> q;
+    // in pq the last_cost then distination.
+    q.push({0, s});
+    while (!q.empty()) {
+        int v = q.top().second;
+        ll d_v = q.top().first;
+        q.pop();
+
+        // for larger values of same node.
+        if (d_v != d[v])
+            continue;
+
+        for (auto edge : adj[v]) {
+            int to = edge.first;
+            ll len = edge.second;
+
+            if (d[v] + len < d[to]) {
+                d[to] = d[v] + len;
+                p[to] = v;
+                q.push({d[to], to});
+            }
+        }
+    }
+}

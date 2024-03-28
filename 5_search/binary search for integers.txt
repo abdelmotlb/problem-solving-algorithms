@@ -1,0 +1,32 @@
+int f(int m, vector<pair<int, int>> &ranges) {
+    return ranges[m].first;
+}
+
+int binary_search_lower_bound_increasing(vector<pair<int, int>> &ranges, int start, int end, int target) {
+    int left = start;
+    int right = end + 1;
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (f(mid, ranges) < target) {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+    return left;
+}
+
+    int binary_search_lower_bound_decreasing(MountainArray &mountainArr, int start, int end, int target) {
+        int left = start;
+        int right = end+1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (f(mid, mountainArr) > target) {
+                left = mid + 1;  // Adjust left for decreasing order
+            }
+            else {
+                right = mid;
+            }
+        }
+        return left;
+    }

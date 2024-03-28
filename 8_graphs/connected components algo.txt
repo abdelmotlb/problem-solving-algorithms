@@ -1,0 +1,27 @@
+int ans = 0;
+For(i, 1, n+1){
+     if(!visited[i]){
+        ans++;
+        DFS(i);
+    }
+} cout << ans NL;
+
+
+
+///////////////////////////////////////////////
+
+
+
+const ll max_size = 1e5+1;
+vector<int> adj[max_size];
+vector<bool> visited(1e5 + 1);
+
+void DFS(int node){
+    visited[node] = true;
+
+    for(auto child: adj[node]){
+        if(!visited[child]){
+            DFS(child);
+        }
+    }
+}

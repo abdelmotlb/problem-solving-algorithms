@@ -1,0 +1,39 @@
+// to make dsu works: call function init(number of nodes).
+// note the variables global.
+
+int ndsu;
+vector<int> par;
+vector<ll> sz;
+
+// initialize disjoint set with vertices 1 -> ndsu
+void init(int size){
+    ndsu = size;
+    par = vector<int>(ndsu+1, 0);
+    sz = vector<ll>(ndsu+1, 0);
+    for (int i = 1; i <= ndsu; i++)
+    {
+        par[i] = i;
+        sz[i] = 1;
+    }
+}
+
+int findpar(int u){
+    if(par[u] == u) /// means we have reached the top level, or the leading node
+        return u;
+    return par[u] = findpar(par[u]); // sets each node in set to the leading node
+}
+
+int connect(int u, int v){
+    // find leading node for both sets
+    u = findpar(u);
+    v = findpar(v);
+    // attach the lowest size to the biggest size
+    if(u != v){
+        if(sz[u] <= sz[v]){
+            par[u] = v, sz[v] += sz[u];
+        }
+        else{
+            par[v] = u, sz[u] += sz[v];
+        }
+    }
+}

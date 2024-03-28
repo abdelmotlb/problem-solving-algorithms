@@ -1,0 +1,2 @@
+[1] out of bound >> arr.end().
+[2] if you search for a particular element, check (arr[ret] == searched-for).

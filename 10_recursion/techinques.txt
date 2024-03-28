@@ -1,0 +1,17 @@
+[1] DFS(node):
+	// visit
+
+	// dfs
+	for(chilren of cur node):
+		DFS();
+
+	// end subtree.
+
+[2] general:
+rec(para):
+	// head >> go to evaluate subtree eqns and come to dp.
+	rec()
+
+		
+	// tail >> end evaluation and go to subtree with it.
+	rec()

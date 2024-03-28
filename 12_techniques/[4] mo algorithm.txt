@@ -1,0 +1,59 @@
+problem solved: https://codeforces.com/group/xwl8dpwmQd/contest/478529/problem/C
+int block;
+struct query {
+    int l, r, idx;
+};
+bool cmp(query &a, query &b) {
+    if (a.l / block != b.l / block)
+        return a.l / block < b.l / block;
+    return a.r < b.r;
+}
+void add(int i,vector<int> &mp,vector<int> &a,int &sum) {
+//    sum -= mp[a[i]] * mp[a[i]] * a[i];
+//    mp[a[i]]++;
+//    sum += mp[a[i]] * mp[a[i]] * a[i];
+    mp[a[i]]++;
+    if(mp[a[i]] == 2) sum++;
+}
+ 
+void remove(int i,vector<int> &mp,vector<int> &a,int &sum) {
+//    sum -= mp[a[i]] * mp[a[i]] * a[i];
+//    mp[a[i]]--;
+//    sum += mp[a[i]] * mp[a[i]] * a[i];
+    mp[a[i]]--;
+    if(mp[a[i]] == 1) sum--;
+}
+ 
+ 
+void solve() {
+    int n, q;
+    cin >> n>> q;
+    vector<int> a(n);
+    vector<int> mp(1e5+5,0);
+    block = (int) sqrt(n) + 1;
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+    }
+    vector<query> vec(q);
+    for (int i = 0; i < q; ++i) {
+        cin >> vec[i].l >> vec[i].r;
+        vec[i].l--, vec[i].r--;
+        vec[i].idx = i;
+    }
+    sort(all(vec), cmp);
+    vector<string> res(q);
+    int l = 0, r = -1;
+    int sum=0;
+    for (int i = 0; i <vec.size() ; ++i) {
+        query x = vec[i];
+        while (l > x.l)add(--l, mp, a, sum);
+        while (r < x.r)add(++r, mp, a, sum);
+        while (l < x.l)remove(l++, mp, a, sum);
+        while (r > x.r)remove(r--, mp, a, sum);
+        if(sum) res[x.idx] = "YES\n";
+        else res[x.idx] = "NO\n";
+    }
+    for (int i = 0; i < q; ++i) {
+        cout << res[i];
+    }
+}

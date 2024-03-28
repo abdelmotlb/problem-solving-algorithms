@@ -1,0 +1,4 @@
+on average O(1)
+s1.append('a');
+s1.append(s2);
+s1.append(5, 'a');

@@ -1,0 +1,6 @@
+[1] problem has small num. of operations >> amr's code for search for nearest element in range.
+[2] max sum in array of pos and neg.(Kadane’s Algorithm) >> code in tips.
+[3] focus on the concept of problem not the test. >> shifting techiques.
+[4] pocketing techinques.
+[5] in iteration process if(!valid) break, continue;
+[6] use global data in case bit memory limit.

@@ -1,0 +1,24 @@
+vector<ll> sub(vector<ll> &arr, int n) {
+    ll mx = 1;
+    ll prop = 1;
+    ll l = arr[0], r = arr[0];
+    ll lp = arr[0], rp = arr[0];
+    for (int i = 1; i < n; i++) {
+        prop -= (arr[i] - arr[i-1] - 2);
+        rp = arr[i];
+
+        if (prop > mx) {
+            mx = prop;
+            l = lp, r = rp;
+        }
+
+        // max with zero.
+        if(prop < 1) {
+            prop = 1;
+            if(i != n-1)lp = arr[i], rp = arr[i];
+        }
+    }
+
+    return vector<ll>{mx, l, r};
+
+}

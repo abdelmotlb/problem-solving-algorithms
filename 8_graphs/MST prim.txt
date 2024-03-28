@@ -1,0 +1,40 @@
+vector<pair<int, long long int>>* prims(int source, int numOfNodes, vector<pair<int, ll>> adj[]) {
+
+    // start by node 1
+    vector<pair<int, ll>> ansAdj[numOfNodes+1];
+    vector<bool> visited(numOfNodes+1, false);
+    int totalCost = 0;
+
+    // min priority queue
+    using piii = pair<ll, pair<int, int>>;
+    priority_queue<piii, vector<piii>, greater<piii>> pq;
+
+    // cost, st, end
+    pq.push({0, {0, 1}});
+    while (!pq.empty()) {
+
+        int des = pq.top().second.second;
+        int src = pq.top().second.first;
+        ll cost = pq.top().first;
+        pq.pop();
+
+        // for larger values of same node.
+        if ( visited[des] )
+            continue;
+        visited[des] = 1;
+        ansAdj[src].push_back({des, cost});
+        ansAdj[des].push_back({src, cost});
+        totalCost += cost;
+
+        for (auto child : adj[des]) {
+            int to = child.first;
+            ll len = child.second;
+
+            if ( !visited[to] ) {
+                pq.push({len, {des, to}});
+            }
+        }
+    }
+
+    return ansAdj;
+}

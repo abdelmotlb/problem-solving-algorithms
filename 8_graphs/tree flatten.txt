@@ -1,0 +1,16 @@
+// to work:
+// vec subtree(n, 0), mp(n, 0), euler; // or n+1 if started from 1
+
+ll flatten(ll node,ll parent, vector<ll> &subtree, vector<ll> adj[], vector<ll> &mp, vector<ll> &euler) {
+    // euler:
+    euler.push_back(node);           // create euler array.
+    mp[node] = (ll)euler.size() - 1; // mapping from node number to euler_array index.
+    // can add in array to check in the time the node entered by timer.
+
+    // subtree creation
+    ll totNodes = 1;
+    for (auto ch: adj[node]) {
+        if (ch == parent)continue;
+        totNodes += flatten(ch, node, subtree, adj, mp, euler);
+    }return subtree[node] = totNodes;
+}

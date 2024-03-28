@@ -1,0 +1,24 @@
+    int partition(vector<int> &a, int l, int h) {
+        int pivot = a[l];
+        int i = l, j = h;
+        while(i < j) {
+            do i++; while(a[i] <= pivot);
+            do j--; while(a[j] > pivot);
+            if(i < j) swap(a[i], a[j]);
+        }
+        swap(a[l], a[j]);
+        return j;
+    }
+
+    void quickSelect(vector<int> &nums, int l, int h) {
+        if(l >= h)return;
+        int pivot = partition(nums, l, h);
+        quickSelect(nums, l, pivot);
+        quickSelect(nums, pivot + 1, h);
+    }
+    const int oo = 1e9 + 1;
+    void sort(vector<int> &nums) {
+        int n = (int) nums.size();
+        nums.push_back(oo);
+        quickSelect(nums, 0, n);
+    }

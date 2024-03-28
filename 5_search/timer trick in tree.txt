@@ -1,0 +1,20 @@
+// see general recursion techinque to get the image.
+
+int timer;
+vector<int> visitT(N);
+vector<int> tin(N), tout(N);
+void DFS(int curNode){
+    // visit
+    visitT[curNode] = true;
+    tin[curNode] = timer;
+    timer++;
+    atDep[lvl[curNode]].push_back(tin[curNode]);
+    // dfs
+    for(auto child: graph[curNode]){
+        if(visitT[child])continue;
+        DFS(child);
+    }
+    tout[curNode] = timer;
+    timer++;
+}
+ 

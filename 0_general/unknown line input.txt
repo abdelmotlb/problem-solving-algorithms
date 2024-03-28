@@ -1,0 +1,19 @@
+cin.ignore();
+string str;       
+getline(cin, str);
+
+istringstream ss(str);
+int lf, rg, v, counter = 0;
+int temp;
+while (ss >> temp) {
+    if (counter == 0) {
+        lf = temp;
+        counter++;
+    } else if (counter == 1) {
+        rg = temp;
+        counter++;
+    } else if (counter == 2) {
+        v = temp;
+        counter++;
+    }
+}

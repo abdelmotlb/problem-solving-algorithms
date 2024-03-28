@@ -1,0 +1,8 @@
+1- space complexity can largen to 1e7 according to available space.
+2- check base case.
+3- simplification tend to the solution.
+4- 1e5*sqrt(1e5) passes.
+5- check if there are duplicates or not.
+6- n! >> max val of n may used is n = 12.
+7- O(q * sqrt(n)) >> q <= 1e3, n <= 1e9 >> no time limit.
+8- check if the numbers you deal with is distinct or not and whether affect your solution or not.
